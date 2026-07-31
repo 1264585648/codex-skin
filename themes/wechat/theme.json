@@ -1,7 +1,7 @@
 {
   "id": "wechat",
   "name": "WeChat Desktop",
-  "description": "A restrained desktop IM theme inspired by WeChat's light PC layout.",
-  "version": "0.1.0",
+  "description": "High-fidelity current WeChat Windows-inspired desktop IM layout for Codex.",
+  "version": "0.2.0",
   "mode": "light"
 }
