@@ -177,6 +177,14 @@ Still version-sensitive:
 
 The next adapter pass should be driven by a structural report from the exact target Windows build rather than increasingly broad generic selectors.
 
+## Pending work / Roadmap
+
+The detailed implementation backlog, priority order and acceptance criteria are documented in:
+
+- [`docs/TODO.md`](docs/TODO.md) — P0/P1/P2 tasks for versioned DOM adapters, high-fidelity WeChat/QQ UI, Agent Messenger enhancements, settings, visual regression, stability, Windows compatibility, testing and the future Theme API.
+
+The immediate priority is to obtain a structural DOM report from the target Windows Codex build and complete the first precise version-specific adapter before expanding to more themes.
+
 ## Theme authoring
 
 Each theme contains:
