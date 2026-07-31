@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN" data-codex-skin="wechat">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Skin Preview</title>
+  <link rel="stylesheet" href="../themes/wechat/theme.css" />
+  <link rel="stylesheet" href="../themes/qq/theme.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body { margin: 0; }
+    .preview-toolbar {
+      position: fixed; z-index: 10000; right: 14px; top: 12px;
+      display: flex; gap: 6px; padding: 5px;
+      border-radius: 10px; background: rgba(20, 24, 30, .72); backdrop-filter: blur(16px);
+    }
+    .preview-toolbar button { border: 0; border-radius: 7px; padding: 7px 11px; cursor: pointer; }
+    .app { height: 100vh; display: flex; overflow: hidden; }
+    .sidebar { display: flex; flex-direction: column; padding: 12px 8px; }
+    .profile { display: flex; align-items: center; gap: 10px; padding: 8px; margin-bottom: 8px; }
+    .profile-avatar, .chat-avatar { width: 38px; height: 38px; flex: 0 0 38px; display: grid; place-items: center; background: #111; color: #fff; font-weight: 600; }
+    .profile-avatar { border-radius: 7px; }
+    .chat-avatar { border-radius: 8px; }
+    .search { width: 100%; margin-bottom: 9px; padding: 0 10px; }
+    .chat-list { overflow: auto; }
+    .chat-row { display: flex; align-items: center; gap: 10px; padding: 8px; cursor: default; }
+    .chat-info { min-width: 0; flex: 1; }
+    .chat-name { font-size: 14px; font-weight: 500; }
+    .chat-last { margin-top: 3px; font-size: 12px; opacity: .55; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .chat-time { align-self: flex-start; padding-top: 2px; font-size: 11px; opacity: .45; }
+    .conversation { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+    .header { flex: 0 0 auto; }
+    .header-title { font-weight: 600; }
+    .header-status { margin-left: 8px; font-size: 12px; opacity: .5; }
+    .header-actions { margin-left: auto; display: flex; gap: 4px; }
+    .header-actions button { border: 0; background: transparent; font-size: 17px; }
+    .messages { min-height: 0; flex: 1; overflow: auto; padding: 20px 8px 14px; }
+    .message-spacer { height: 3px; }
+    .tool-card { line-height: 1.55; }
+    .tool-card code { display: block; margin-top: 6px; }
+    .composer-wrap { flex: 0 0 auto; }
+    .composer textarea { width: 100%; height: 55px; resize: none; font: inherit; }
+    .composer-toolbar { display: flex; align-items: center; }
+    .composer-toolbar .left-tools { display: flex; gap: 2px; }
+    .composer-toolbar button { cursor: default; }
+  </style>
+</head>
+<body data-codex-skin-role="app-shell">
+  <div class="preview-toolbar">
+    <button onclick="setTheme('wechat')">微信</button>
+    <button onclick="setTheme('qq')">QQ</button>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar" data-codex-skin-role="sidebar">
+      <div class="profile">
+        <div class="profile-avatar">C</div>
+        <div>
+          <div style="font-weight:600">Codex</div>
+          <div style="font-size:11px;opacity:.5;margin-top:2px">Agent Messenger</div>
+        </div>
+      </div>
+      <input class="search" role="searchbox" placeholder="搜索" />
+      <div class="chat-list" data-codex-skin-role="conversation-list" role="list">
+        <div class="chat-row" data-codex-skin-role="active-chat" role="listitem">
+          <div class="chat-avatar">A</div>
+          <div class="chat-info">
+            <div class="chat-name">Agent Interview</div>
+            <div class="chat-last">我已经检查完首页结构</div>
+          </div>
+          <div class="chat-time">15:21</div>
+        </div>
+        <div class="chat-row" role="listitem">
+          <div class="chat-avatar">G</div>
+          <div class="chat-info">
+            <div class="chat-name">GPT Converter</div>
+            <div class="chat-last">登录页面已更新完成</div>
+          </div>
+          <div class="chat-time">14:52</div>
+        </div>
+        <div class="chat-row" role="listitem">
+          <div class="chat-avatar">K</div>
+          <div class="chat-info">
+            <div class="chat-name">Knowledge Base</div>
+            <div class="chat-last">正在整理业务规则</div>
+          </div>
+          <div class="chat-time">13:18</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="conversation" data-codex-skin-role="conversation">
+      <header class="header" data-codex-skin-role="chat-header">
+        <span class="header-title">Agent Interview</span>
+        <span class="header-status">Codex · 工作区</span>
+        <div class="header-actions">
+          <button aria-label="搜索">⌕</button>
+          <button aria-label="更多">•••</button>
+        </div>
+      </header>
+
+      <section class="messages">
+        <article data-codex-skin-role="user-message" data-codex-skin-peer="你">
+          帮我看看 interview 首页，先把 Question Card 做得更像成熟 SaaS 产品。
+        </article>
+
+        <article data-codex-skin-role="agent-message" data-codex-skin-peer="Codex">
+          我先检查页面结构和现有组件。Question Card 可以保留现在的信息密度，但需要强化题目、难度和进度三个层级。
+        </article>
+
+        <div class="tool-card" data-codex-skin-role="tool-card" data-codex-skin-title="执行任务">
+          已读取项目文件
+          <code>src/components/QuestionCard.tsx</code>
+          <code>src/pages/Home.tsx</code>
+        </div>
+
+        <article data-codex-skin-role="agent-message" data-codex-skin-peer="Codex">
+          找到了。我准备直接修改 QuestionCard，并把 diff 控制在这个组件内。
+        </article>
+
+        <div class="tool-card" data-codex-skin-role="diff-card" data-codex-skin-title="文件变更">
+          QuestionCard.tsx
+          <div style="margin-top:7px;font-size:12px;opacity:.65">+46 &nbsp; -17</div>
+        </div>
+      </section>
+
+      <div class="composer-wrap">
+        <form class="composer" data-codex-skin-role="composer" onsubmit="return false">
+          <textarea data-codex-skin-role="composer-input" placeholder="发消息给 Codex..."></textarea>
+          <div class="composer-toolbar" data-codex-skin-role="composer-toolbar">
+            <div class="left-tools">
+              <button type="button">☺</button>
+              <button type="button">＋</button>
+              <button type="button">⌘</button>
+            </div>
+            <button type="button" data-codex-skin-role="send-button">发送</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-codex-skin', theme);
+      localStorage.setItem('codex-skin-preview-theme', theme);
+    }
+    setTheme(localStorage.getItem('codex-skin-preview-theme') || 'wechat');
+  </script>
+</body>
+</html>
