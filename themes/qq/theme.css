@@ -1,122 +1,360 @@
 html[data-codex-skin="qq"] {
-  --qq-bg: #f3f7ff;
-  --qq-panel: rgba(255, 255, 255, 0.88);
-  --qq-sidebar: rgba(239, 246, 255, 0.94);
-  --qq-border: rgba(70, 125, 220, 0.14);
-  --qq-blue: #2f7df6;
-  --qq-blue-soft: #dceaff;
-  --qq-text: #18233a;
-  --qq-muted: #7c8aa5;
-  --qq-shadow: 0 10px 28px rgba(63, 101, 164, 0.12);
+  --qq-bg: #f5f7fb;
+  --qq-panel: #ffffff;
+  --qq-sidebar: rgba(241, 246, 252, 0.94);
+  --qq-sidebar-hover: rgba(0, 132, 255, 0.07);
+  --qq-active: rgba(0, 132, 255, 0.12);
+  --qq-border: rgba(25, 55, 90, 0.09);
+  --qq-blue: #0099ff;
+  --qq-blue-deep: #1685e8;
+  --qq-blue-soft: #e9f5ff;
+  --qq-text: #1d2733;
+  --qq-muted: #8190a5;
+  --qq-shadow: 0 8px 26px rgba(44, 81, 120, 0.08);
   color-scheme: light;
 }
 
 html[data-codex-skin="qq"],
-html[data-codex-skin="qq"] body {
-  background: radial-gradient(circle at 82% 12%, #e3efff 0, transparent 30%), var(--qq-bg) !important;
+html[data-codex-skin="qq"] body,
+html[data-codex-skin="qq"] [data-codex-skin-role="app-shell"] {
+  margin: 0 !important;
+  background: var(--qq-bg) !important;
   color: var(--qq-text) !important;
-  font-family: "Segoe UI Variable", "Microsoft YaHei UI", sans-serif !important;
+  font-family: "Segoe UI Variable", "Microsoft YaHei UI", "Segoe UI", sans-serif !important;
+  font-size: 14px !important;
 }
 
-html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"],
-html[data-codex-skin="qq"] aside,
-html[data-codex-skin="qq"] nav {
+html[data-codex-skin="qq"] body {
+  overflow: hidden !important;
+}
+
+/* QQ NT left chat list */
+html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"] {
+  width: 292px !important;
+  min-width: 252px !important;
+  max-width: 340px !important;
   background: var(--qq-sidebar) !important;
   border-right: 1px solid var(--qq-border) !important;
-  backdrop-filter: blur(24px) saturate(135%) !important;
+  backdrop-filter: blur(30px) saturate(135%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(135%) !important;
+  box-shadow: none !important;
 }
 
-html[data-codex-skin="qq"] [data-codex-skin-role="conversation"],
-html[data-codex-skin="qq"] main {
-  background: rgba(247, 250, 255, 0.72) !important;
-}
-
-html[data-codex-skin="qq"] [data-codex-skin-role="user-message"],
-html[data-codex-skin="qq"] [data-message-author-role="user"],
-html[data-codex-skin="qq"] [data-role="user"] {
-  width: fit-content !important;
-  max-width: min(72%, 780px) !important;
-  margin-left: auto !important;
-  margin-right: 20px !important;
-  padding: 11px 14px !important;
-  border: 1px solid rgba(47, 125, 246, 0.14) !important;
-  border-radius: 18px 18px 5px 18px !important;
-  background: linear-gradient(145deg, #4191ff, #2674ed) !important;
-  color: #fff !important;
-  box-shadow: 0 8px 20px rgba(47, 125, 246, 0.22) !important;
-  line-height: 1.62 !important;
-}
-
-html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"],
-html[data-codex-skin="qq"] [data-message-author-role="assistant"],
-html[data-codex-skin="qq"] [data-role="assistant"] {
-  width: fit-content !important;
-  max-width: min(76%, 820px) !important;
-  margin-right: auto !important;
-  margin-left: 20px !important;
-  padding: 11px 14px !important;
-  border: 1px solid var(--qq-border) !important;
-  border-radius: 18px 18px 18px 5px !important;
-  background: var(--qq-panel) !important;
+html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"] input,
+html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"] [role="searchbox"] {
+  height: 34px !important;
+  border: 1px solid rgba(47, 91, 138, 0.05) !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.76) !important;
   color: var(--qq-text) !important;
-  box-shadow: 0 8px 24px rgba(63, 101, 164, 0.08) !important;
-  backdrop-filter: blur(18px) saturate(125%) !important;
-  line-height: 1.62 !important;
+  box-shadow: none !important;
 }
 
+html[data-codex-skin="qq"] [data-codex-skin-role="conversation-list"] {
+  padding: 6px 7px 12px !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="conversation-list"] > *,
+html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"] [role="listitem"] {
+  min-height: 58px !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: background-color 120ms ease !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="conversation-list"] > *:hover,
+html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"] [role="listitem"]:hover {
+  background: var(--qq-sidebar-hover) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="active-chat"] {
+  background: var(--qq-active) !important;
+  color: var(--qq-text) !important;
+}
+
+/* Chat surface */
+html[data-codex-skin="qq"] [data-codex-skin-role="conversation"] {
+  position: relative !important;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(210, 233, 255, 0.34), transparent 31%),
+    #f8fafc !important;
+  color: var(--qq-text) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="chat-header"] {
+  min-height: 64px !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-bottom: 1px solid var(--qq-border) !important;
+  backdrop-filter: blur(28px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(140%) !important;
+  box-shadow: none !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="chat-header"] h1,
+html[data-codex-skin="qq"] [data-codex-skin-role="chat-header"] h2,
+html[data-codex-skin="qq"] [data-codex-skin-role="chat-header"] h3 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #1c2632 !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="chat-header"] button {
+  min-width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #3a4a5e !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="chat-header"] button:hover {
+  background: rgba(0, 132, 255, 0.08) !important;
+}
+
+/* QQ message bubbles */
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"],
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"] {
+  position: relative !important;
+  width: fit-content !important;
+  max-width: min(70%, 780px) !important;
+  min-height: 40px !important;
+  margin-top: 18px !important;
+  margin-bottom: 18px !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
+  line-height: 1.64 !important;
+  overflow: visible !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"] {
+  margin-left: auto !important;
+  margin-right: 72px !important;
+  border: 1px solid rgba(0, 126, 229, 0.08) !important;
+  background: var(--qq-blue) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(0, 153, 255, 0.12) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"]::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 14px !important;
+  right: -6px !important;
+  width: 11px !important;
+  height: 11px !important;
+  background: var(--qq-blue) !important;
+  transform: rotate(45deg) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"]::after {
+  content: "我" !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: -55px !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #5ab3ff, #187fdf) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(28, 106, 177, 0.18) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"] {
+  margin-left: 72px !important;
+  margin-right: auto !important;
+  border: 1px solid rgba(25, 55, 90, 0.075) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: var(--qq-text) !important;
+  box-shadow: 0 3px 12px rgba(44, 81, 120, 0.05) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"]::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 14px !important;
+  left: -6px !important;
+  width: 11px !important;
+  height: 11px !important;
+  background: #fff !important;
+  border-left: 1px solid rgba(25, 55, 90, 0.05) !important;
+  border-bottom: 1px solid rgba(25, 55, 90, 0.05) !important;
+  transform: rotate(45deg) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"]::after {
+  content: "C" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -55px !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #242a34, #10141a) !important;
+  color: #fff !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(15, 28, 45, 0.15) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"] p:first-child,
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"] p:first-child {
+  margin-top: 0 !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"] p:last-child,
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"] p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Tool / diff cards: QQ file and service-card feel */
 html[data-codex-skin="qq"] [data-codex-skin-role="tool-card"],
 html[data-codex-skin="qq"] [data-codex-skin-role="diff-card"],
 html[data-codex-skin="qq"] [data-codex-skin-role="approval-card"] {
-  margin: 10px 20px !important;
-  padding: 13px 15px !important;
-  border: 1px solid var(--qq-border) !important;
-  border-radius: 16px !important;
-  background: rgba(255, 255, 255, 0.82) !important;
+  position: relative !important;
+  max-width: min(74%, 700px) !important;
+  margin: 14px auto 14px 72px !important;
+  padding: 40px 15px 13px !important;
+  border: 1px solid rgba(43, 93, 143, 0.09) !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: var(--qq-text) !important;
   box-shadow: var(--qq-shadow) !important;
-  backdrop-filter: blur(20px) saturate(125%) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="tool-card"]::before,
+html[data-codex-skin="qq"] [data-codex-skin-role="diff-card"]::before,
+html[data-codex-skin="qq"] [data-codex-skin-role="approval-card"]::before {
+  content: attr(data-codex-skin-title) !important;
+  position: absolute !important;
+  top: 10px !important;
+  left: 15px !important;
+  min-height: 22px !important;
+  padding: 2px 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border-radius: 6px !important;
+  background: var(--qq-blue-soft) !important;
+  color: var(--qq-blue-deep) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="approval-card"]::before {
+  background: #fff4dc !important;
+  color: #a76600 !important;
 }
 
 html[data-codex-skin="qq"] [data-codex-skin-role="code-block"],
 html[data-codex-skin="qq"] pre {
-  border: 1px solid rgba(46, 91, 157, 0.12) !important;
-  border-radius: 12px !important;
-  background: #f5f8fc !important;
-  color: #263750 !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  margin: 8px 0 !important;
+  padding: 11px 13px !important;
+  border: 1px solid rgba(43, 93, 143, 0.08) !important;
+  border-radius: 8px !important;
+  background: #f5f8fb !important;
+  color: #27394d !important;
+  box-shadow: none !important;
+  font-family: "Cascadia Mono", Consolas, monospace !important;
+  font-size: 12.5px !important;
 }
 
+/* QQ NT composer: wide white surface with tool row */
 html[data-codex-skin="qq"] [data-codex-skin-role="composer"] {
+  position: relative !important;
   margin: 10px 14px 14px !important;
-  border: 1px solid var(--qq-border) !important;
-  border-radius: 18px !important;
-  background: rgba(255, 255, 255, 0.92) !important;
-  box-shadow: var(--qq-shadow) !important;
-  backdrop-filter: blur(24px) saturate(135%) !important;
+  padding: 12px 12px 42px !important;
+  min-height: 112px !important;
+  border: 1px solid rgba(43, 93, 143, 0.08) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 16px rgba(44, 81, 120, 0.055) !important;
+  backdrop-filter: blur(18px) saturate(120%) !important;
 }
 
+html[data-codex-skin="qq"] [data-codex-skin-role="composer-input"],
 html[data-codex-skin="qq"] textarea,
 html[data-codex-skin="qq"] [contenteditable="true"] {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
   color: var(--qq-text) !important;
   caret-color: var(--qq-blue) !important;
+  box-shadow: none !important;
+  line-height: 1.62 !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="composer-toolbar"] {
+  position: absolute !important;
+  left: 10px !important;
+  right: 10px !important;
+  bottom: 7px !important;
+  min-height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="composer"] button {
+  min-width: 30px !important;
+  height: 30px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: #53657a !important;
+  box-shadow: none !important;
+  transition: background-color 120ms ease, color 120ms ease !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="composer"] button:hover {
+  background: rgba(0, 132, 255, 0.08) !important;
+  color: var(--qq-blue-deep) !important;
 }
 
 html[data-codex-skin="qq"] [data-codex-skin-role="send-button"] {
+  min-width: 72px !important;
+  height: 32px !important;
+  margin-left: auto !important;
+  padding: 0 17px !important;
   border: 0 !important;
-  border-radius: 12px !important;
+  border-radius: 7px !important;
   background: var(--qq-blue) !important;
   color: #fff !important;
-  box-shadow: 0 6px 14px rgba(47, 125, 246, 0.24) !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
 }
 
-html[data-codex-skin="qq"] button,
+html[data-codex-skin="qq"] [data-codex-skin-role="send-button"]:not(:disabled):hover {
+  background: var(--qq-blue-deep) !important;
+}
+
 html[data-codex-skin="qq"] a {
-  transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease !important;
-}
-
-html[data-codex-skin="qq"] button:hover {
-  transform: translateY(-1px) !important;
+  color: #1586df !important;
 }
 
 html[data-codex-skin="qq"] ::selection {
-  background: rgba(47, 125, 246, 0.22) !important;
+  background: rgba(0, 153, 255, 0.2) !important;
+}
+
+html[data-codex-skin="qq"] ::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px !important;
+}
+
+html[data-codex-skin="qq"] ::-webkit-scrollbar-thumb {
+  border-radius: 7px !important;
+  background: rgba(64, 92, 124, 0.17) !important;
+}
+
+html[data-codex-skin="qq"] ::-webkit-scrollbar-track {
+  background: transparent !important;
 }
