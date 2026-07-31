@@ -15,7 +15,9 @@ export async function findPageTarget(baseUrl: string): Promise<CdpTarget> {
   }
 
   const targets = (await response.json()) as CdpTarget[];
-  const target = targets.find((item) => item.type === 'page' && item.webSocketDebuggerUrl);
+  const pages = targets.filter((item) => item.type === 'page' && item.webSocketDebuggerUrl);
+  const target = pages.find((item) => /codex/i.test(`${item.title} ${item.url}`)) ?? pages[0];
+
   if (!target) {
     throw new Error('No debuggable Codex page target found.');
   }
@@ -29,14 +31,23 @@ export class CdpClient {
 
   private constructor(socket: WebSocket) {
     this.socket = socket;
+
     socket.on('message', (raw) => {
       const message = JSON.parse(raw.toString()) as { id?: number; result?: unknown; error?: { message?: string } };
       if (!message.id) return;
+
       const task = this.pending.get(message.id);
       if (!task) return;
+
       this.pending.delete(message.id);
       if (message.error) task.reject(new Error(message.error.message ?? 'Unknown CDP error'));
       else task.resolve(message.result);
+    });
+
+    socket.on('close', () => {
+      const error = new Error('CDP connection closed.');
+      for (const task of this.pending.values()) task.reject(error);
+      this.pending.clear();
     });
   }
 
@@ -50,8 +61,15 @@ export class CdpClient {
 
   call(method: string, params: Record<string, unknown> = {}): Promise<unknown> {
     const id = this.nextId++;
-    this.socket.send(JSON.stringify({ id, method, params }));
-    return new Promise((resolve, reject) => this.pending.set(id, { resolve, reject }));
+
+    return new Promise((resolve, reject) => {
+      this.pending.set(id, { resolve, reject });
+      this.socket.send(JSON.stringify({ id, method, params }), (error) => {
+        if (!error) return;
+        this.pending.delete(id);
+        reject(error);
+      });
+    });
   }
 
   evaluate(expression: string): Promise<unknown> {
