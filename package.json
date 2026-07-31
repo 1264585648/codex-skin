@@ -1,10 +1,13 @@
 {
   "name": "codex-skin",
-  "version": "0.1.0",
-  "description": "Runtime themes for Codex Desktop via Chrome DevTools Protocol.",
+  "version": "0.2.0",
+  "description": "Chat-first runtime themes for Codex Desktop via a semantic CDP adapter.",
   "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
+    "dev:wechat": "tsx src/index.ts --theme wechat",
+    "dev:qq": "tsx src/index.ts --theme qq",
+    "inspect": "tsx src/inspect.ts",
     "start": "tsx src/index.ts",
     "typecheck": "tsc --noEmit"
   },
