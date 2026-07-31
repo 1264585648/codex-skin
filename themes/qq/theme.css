@@ -1,0 +1,122 @@
+html[data-codex-skin="qq"] {
+  --qq-bg: #f3f7ff;
+  --qq-panel: rgba(255, 255, 255, 0.88);
+  --qq-sidebar: rgba(239, 246, 255, 0.94);
+  --qq-border: rgba(70, 125, 220, 0.14);
+  --qq-blue: #2f7df6;
+  --qq-blue-soft: #dceaff;
+  --qq-text: #18233a;
+  --qq-muted: #7c8aa5;
+  --qq-shadow: 0 10px 28px rgba(63, 101, 164, 0.12);
+  color-scheme: light;
+}
+
+html[data-codex-skin="qq"],
+html[data-codex-skin="qq"] body {
+  background: radial-gradient(circle at 82% 12%, #e3efff 0, transparent 30%), var(--qq-bg) !important;
+  color: var(--qq-text) !important;
+  font-family: "Segoe UI Variable", "Microsoft YaHei UI", sans-serif !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="sidebar"],
+html[data-codex-skin="qq"] aside,
+html[data-codex-skin="qq"] nav {
+  background: var(--qq-sidebar) !important;
+  border-right: 1px solid var(--qq-border) !important;
+  backdrop-filter: blur(24px) saturate(135%) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="conversation"],
+html[data-codex-skin="qq"] main {
+  background: rgba(247, 250, 255, 0.72) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="user-message"],
+html[data-codex-skin="qq"] [data-message-author-role="user"],
+html[data-codex-skin="qq"] [data-role="user"] {
+  width: fit-content !important;
+  max-width: min(72%, 780px) !important;
+  margin-left: auto !important;
+  margin-right: 20px !important;
+  padding: 11px 14px !important;
+  border: 1px solid rgba(47, 125, 246, 0.14) !important;
+  border-radius: 18px 18px 5px 18px !important;
+  background: linear-gradient(145deg, #4191ff, #2674ed) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 20px rgba(47, 125, 246, 0.22) !important;
+  line-height: 1.62 !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="agent-message"],
+html[data-codex-skin="qq"] [data-message-author-role="assistant"],
+html[data-codex-skin="qq"] [data-role="assistant"] {
+  width: fit-content !important;
+  max-width: min(76%, 820px) !important;
+  margin-right: auto !important;
+  margin-left: 20px !important;
+  padding: 11px 14px !important;
+  border: 1px solid var(--qq-border) !important;
+  border-radius: 18px 18px 18px 5px !important;
+  background: var(--qq-panel) !important;
+  color: var(--qq-text) !important;
+  box-shadow: 0 8px 24px rgba(63, 101, 164, 0.08) !important;
+  backdrop-filter: blur(18px) saturate(125%) !important;
+  line-height: 1.62 !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="tool-card"],
+html[data-codex-skin="qq"] [data-codex-skin-role="diff-card"],
+html[data-codex-skin="qq"] [data-codex-skin-role="approval-card"] {
+  margin: 10px 20px !important;
+  padding: 13px 15px !important;
+  border: 1px solid var(--qq-border) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  box-shadow: var(--qq-shadow) !important;
+  backdrop-filter: blur(20px) saturate(125%) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="code-block"],
+html[data-codex-skin="qq"] pre {
+  border: 1px solid rgba(46, 91, 157, 0.12) !important;
+  border-radius: 12px !important;
+  background: #f5f8fc !important;
+  color: #263750 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="composer"] {
+  margin: 10px 14px 14px !important;
+  border: 1px solid var(--qq-border) !important;
+  border-radius: 18px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: var(--qq-shadow) !important;
+  backdrop-filter: blur(24px) saturate(135%) !important;
+}
+
+html[data-codex-skin="qq"] textarea,
+html[data-codex-skin="qq"] [contenteditable="true"] {
+  color: var(--qq-text) !important;
+  caret-color: var(--qq-blue) !important;
+}
+
+html[data-codex-skin="qq"] [data-codex-skin-role="send-button"] {
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: var(--qq-blue) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 14px rgba(47, 125, 246, 0.24) !important;
+}
+
+html[data-codex-skin="qq"] button,
+html[data-codex-skin="qq"] a {
+  transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease !important;
+}
+
+html[data-codex-skin="qq"] button:hover {
+  transform: translateY(-1px) !important;
+}
+
+html[data-codex-skin="qq"] ::selection {
+  background: rgba(47, 125, 246, 0.22) !important;
+}
