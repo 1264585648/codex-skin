@@ -8,6 +8,8 @@ export type CdpTarget = {
   webSocketDebuggerUrl?: string;
 };
 
+type CdpEventHandler = (params: unknown) => void | Promise<void>;
+
 export async function findPageTarget(baseUrl: string): Promise<CdpTarget> {
   const response = await fetch(`${baseUrl.replace(/\/$/, '')}/json/list`);
   if (!response.ok) {
@@ -16,10 +18,11 @@ export async function findPageTarget(baseUrl: string): Promise<CdpTarget> {
 
   const targets = (await response.json()) as CdpTarget[];
   const pages = targets.filter((item) => item.type === 'page' && item.webSocketDebuggerUrl);
-  const target = pages.find((item) => /codex/i.test(`${item.title} ${item.url}`)) ?? pages[0];
+  const preferred = pages.find((item) => /codex|chatgpt/i.test(`${item.title} ${item.url}`));
+  const target = preferred ?? pages[0];
 
   if (!target) {
-    throw new Error('No debuggable Codex page target found.');
+    throw new Error('No debuggable Codex/ChatGPT page target found.');
   }
   return target;
 }
@@ -28,20 +31,40 @@ export class CdpClient {
   private socket: WebSocket;
   private nextId = 1;
   private pending = new Map<number, { resolve: (value: unknown) => void; reject: (error: Error) => void }>();
+  private eventHandlers = new Map<string, Set<CdpEventHandler>>();
 
   private constructor(socket: WebSocket) {
     this.socket = socket;
 
     socket.on('message', (raw) => {
-      const message = JSON.parse(raw.toString()) as { id?: number; result?: unknown; error?: { message?: string } };
-      if (!message.id) return;
+      const message = JSON.parse(raw.toString()) as {
+        id?: number;
+        method?: string;
+        params?: unknown;
+        result?: unknown;
+        error?: { message?: string };
+      };
 
-      const task = this.pending.get(message.id);
-      if (!task) return;
+      if (message.id) {
+        const task = this.pending.get(message.id);
+        if (!task) return;
 
-      this.pending.delete(message.id);
-      if (message.error) task.reject(new Error(message.error.message ?? 'Unknown CDP error'));
-      else task.resolve(message.result);
+        this.pending.delete(message.id);
+        if (message.error) task.reject(new Error(message.error.message ?? 'Unknown CDP error'));
+        else task.resolve(message.result);
+        return;
+      }
+
+      if (!message.method) return;
+      const handlers = this.eventHandlers.get(message.method);
+      if (!handlers) return;
+
+      for (const handler of handlers) {
+        Promise.resolve(handler(message.params)).catch((error: unknown) => {
+          const reason = error instanceof Error ? error.message : String(error);
+          console.error(`[codex-skin] CDP event handler failed (${message.method}): ${reason}`);
+        });
+      }
     });
 
     socket.on('close', () => {
@@ -70,6 +93,17 @@ export class CdpClient {
         reject(error);
       });
     });
+  }
+
+  on(method: string, handler: CdpEventHandler): () => void {
+    const handlers = this.eventHandlers.get(method) ?? new Set<CdpEventHandler>();
+    handlers.add(handler);
+    this.eventHandlers.set(method, handlers);
+
+    return () => {
+      handlers.delete(handler);
+      if (handlers.size === 0) this.eventHandlers.delete(method);
+    };
   }
 
   evaluate(expression: string): Promise<unknown> {
